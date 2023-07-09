@@ -1,0 +1,121 @@
+a{
+    text-decoration:none;
+}
+.login-form {
+    width: 400px;
+    height: auto;
+    margin: 5% auto;
+    background-color: #283041 !important
+ }
+.login-form h4 {
+    color:#00A9BD;  
+ }
+ 
+ .login-form a {
+    text-decoration: none;
+ }
+ 
+ .login-form a strong {
+    font-weight: normal;
+    color:#00A9BD;    
+ }
+ 
+ .login-form a:hover strong {
+    font-weight: bold;
+    color:#00A9BD;
+ }
+ .card {
+   -webkit-transition: all 0.5s ease-in-out;
+   -moz-transition: all 0.5s ease-in-out;
+   -ms-transition: all 0.5s ease-in-out;
+   -o-transition: all 0.5s ease-in-out;
+   transition: all 0.5s ease-in-out;
+   border-radius: .55rem;
+   border-color: #E6E9ED;
+   position: relative;   
+}
+ .theme-btn{
+    color:#fff;
+    font-size:16px;
+    background-color: #00A9BD;
+    border-color: #00A9BD
+ }
+ .notification-board .card {   
+   height: auto;
+   margin: 15% auto;
+   background-color: #283041 !important
+}
+.notification-board h4 {
+   color:#00A9BD;
+   border-bottom: 1px solid #222;
+   width:50%; 
+   margin: auto 25%;
+   padding:20px;
+}
+ #boxitem .card-header{
+   background-color: #283041;
+   color:#fff;
+ }
+ #employeePhoto {
+  position:relative;
+}
+ #employeePhoto img {
+   width: 50%;  
+   border: 2px solid #283041;
+   border-radius: 50%;
+}
+
+.photo-edit-btn {
+   width: 36px;
+   height: 36px;
+   border-radius: 50%;
+   background-color: gainsboro;
+   border: 1.5px solid #283041;
+   position: absolute;
+   bottom: 1%;
+   left: 60%;
+}
+.photo-edit-btn .icon{
+   color: #283041;
+  font-size:20px;
+  margin:20% auto;
+}
+.photo-edit-btn:hover{
+   background-color: #283041;
+   border: 2px solid #00A9BD;
+}
+.photo-edit-btn .icon{
+   font-size:48px;
+}
+#photoEdit{
+   position:absolute;
+   top:0px;
+   left:0%;
+}
+.icon:hover{
+   color: #00A9BD;
+   scale: 1.1;
+}
+#companyLogo img {
+   width: 100%;  
+   border: 2px solid #283041;
+   border-radius: 10%;
+}
+ 
+/* Mobile device */
+@media (max-width:600px) {
+    .login-form {
+        width: 380px;
+        height: auto;
+        margin-top: 20%;
+     } 
+     .notification-board .card {   
+      height: auto;
+      margin: 15% auto;
+      background-color: #283041 !important
+   }
+     .notification-board p { 
+      margin: auto 10%;
+   }
+  
+}
