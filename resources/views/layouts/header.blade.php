@@ -15,7 +15,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google chart CDN -->
+        <!-- flag icon css cdn -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+     <!-- jQuery CDN-->
+     <script src="https://code.jquery.com/jquery-3.6.3.js"
+                integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous">
+            </script>
+        <!-- Google chart CDN -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Plugins css -->
@@ -64,10 +70,7 @@
                 integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow=="
                 crossorigin="anonymous" referrerpolicy="no-referrer">
             </script>
-            <!-- jQuery CDN-->
-            <script src="https://code.jquery.com/jquery-3.6.3.js"
-                integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous">
-            </script>
+           
 
 
             <!-- Vendor js -->
@@ -86,6 +89,18 @@
                 setTimeout(function() {
                     $(".errorMsg").fadeOut('slow')
                 }, 2000);
+
+                 // Handle country code selection
+  $(".dropdown-item").click(function() {
+    var countryCode = $(this).data("code");
+    var countryFlag = $(this).data("flag");
+
+    // Update phone code display
+    $("#phoneCode").text(countryCode);
+
+    // Update flag icon
+    $("#countryDropdown").find("span").removeClass().addClass("flag-icon flag-icon-" + countryFlag);
+  });
             });
             </script>
 </body>

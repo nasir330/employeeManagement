@@ -32,9 +32,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     //employees routes
+    Route::get('/employee-list', [userController::class, 'index'])->name('employee.list');
     Route::get('/set-profiledata/',[userController::class,'setProfile'])->name('set.profile');
     Route::post('/set-profiledata/',[userController::class,'setProfileData'])->name('set.profile');
-    Route::get('/employee-list', [userController::class, 'index'])->name('employee.list');
     Route::get('/export-users',[userController::class, 'exportUser'])->name('exportUser');
     Route::get('/send-link', [userController::class, 'sendLink'])->name('sendLink.employee');
     Route::post('/send-link', [userController::class, 'sendLinkStore'])->name('sendLink.employee');
@@ -65,13 +65,15 @@ Route::middleware('auth')->group(function () {
     route::post('/add-departments',[DepartmentsController::class, 'store'])->name('add.departments');
     route::get('/edit-departments/{id}',[DepartmentsController::class, 'edit'])->name('edit.departments');
     route::post('/update-departments',[DepartmentsController::class, 'update'])->name('update.departments');
+    route::get('/fetch-admin-department',[DepartmentsController::class, 'fetchAdminDepartment'])->name('admin.fetch.departents');
+    
    
     //Designation
     route::get('/designations',[DesignationsController::class, 'index'])->name('designations');
     route::post('/add-designations',[DesignationsController::class, 'store'])->name('add.designations');
     route::get('/edit-designations/{id}',[DesignationsController::class, 'edit'])->name('edit.designations');
     route::post('/update-designations',[DesignationsController::class, 'update'])->name('update.designations');
-   
+    route::get('/fetch-designation/{id}',[DesignationsController::class, 'fetchDesignation'])->name('fetch.designation');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

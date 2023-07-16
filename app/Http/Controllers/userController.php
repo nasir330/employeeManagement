@@ -18,54 +18,99 @@ use Excel;
 
 class userController extends Controller
 {
-   public function setProfile(){
-         $userTypes = UserType::whereNot('id',1)->get();
-         $departments = Department::all();    
-         $designations = Designation::all();
-
-      return view('pages.employees.setProfile',['userTypes'=>$userTypes, 'departments'=>$departments, 'designations'=>$designations]);
+   public function sendLink()
+   {
+     $departments = Department::all();    
+   //   $designations = Designation::all();
+     $userTypes = UserType::whereNot('id',1)->get();
+     return view('pages.employees.sendLink',['userTypes'=> $userTypes, 'departments'=> $departments]);
    }
-   public function setProfileData(Request $request){      
+   public function sendLinkStore(Request $request)
+   {
+     return $request->all();
+     // Generate a random password
+     $autoPassword = Str::random(8);     
+
+     // store  user data
+     $user = User::create([
+         'userType' => $request->userType,
+         'email' => $request->email,          
+         'password' => Hash::make($autoPassword),           
+     ]);
+
+     // store employee data
+     $employee = Employees::create([
+         'userId' => $user->id,
+         'firstName' => $request->firstName,          
+         'lastName' => $request->lastName,          
+         'nickName' => $request->nickName,
+     ]);
+
+     // store financial data
+     $financial = Financial::create([
+         'userId' => $user->id,          
+     ]);
+
+      // Send the login details to the user's email
+      Mail::send('notification.invitation', ['user' => $user, 'password' => $autoPassword], function($message) use ($user) {
+         $message->to($user->email)->subject('Your account has been created successfully');
+     });
+     
+     // Flash a success message and redirect back
+     session()->flash('success', 'Link Send to the Email successfully..!!');
+     return redirect()->back();    
+     
+   }
+   public function setProfile()
+   {
+      $userTypes = UserType::whereNot('id',1)->get();
+      $departments = Department::all();    
+      $designations = Designation::all();
+
+   return view('pages.employees.setProfile',['userTypes'=>$userTypes, 'departments'=>$departments, 'designations'=>$designations]);
+   }
+   public function setProfileData(Request $request)
+   {      
 
          // Save the user's photo
          $photo = $request->file('photo');
          $photo_name = $photo->getClientOriginalName();
          $photo_storage = $photo->storeAs("public/uploads", $photo_name);
          $photo_path = 'storage/uploads/'.$photo_name;
- 
+
          // update employee data
          Employees::where('userId',$request->profileId)->update([
             'firstName' => $request->firstName,          
-             'lastName' => $request->lastName,          
-             'nickName' => $request->nickName,          
-             'fathersName' => $request->fathersName,          
-             'gender' => $request->gender,          
-             'presentAddress' => $request->presentAddress,          
-             'permanentAddress' => $request->permanentAddress,          
-             'dob' => $request->dob,          
-             'phone' => $request->phone,          
-             'referenceName' => $request->referenceName,          
-             'referencePhone' => $request->referencePhone,          
-             'govId' => $request->govId,          
-             'govIdNo' => $request->govIdNo,          
-             'photo' => $photo_path,          
-             'department' => $request->department,         
-             'designation' => $request->designation,         
-             'joinDate' => $request->joinDate,         
-             'leaveDate' => $request->leaveDate,         
-             'status' => $request->status,         
-             'shift' => $request->shift,         
-             'hiringManager' => $request->hiringManager,
+            'lastName' => $request->lastName,          
+            'nickName' => $request->nickName,          
+            'fathersName' => $request->fathersName,          
+            'gender' => $request->gender,          
+            'presentAddress' => $request->presentAddress,          
+            'permanentAddress' => $request->permanentAddress,          
+            'dob' => $request->dob,          
+            'phone' => $request->phone,          
+            'referenceName' => $request->referenceName,          
+            'referencePhone' => $request->referencePhone,          
+            'govId' => $request->govId,          
+            'govIdNo' => $request->govIdNo,          
+            'photo' => $photo_path,          
+            'department' => $request->department,         
+            'designation' => $request->designation,         
+            'joinDate' => $request->joinDate,         
+            'leaveDate' => $request->leaveDate,         
+            'status' => $request->status,         
+            'shift' => $request->shift,         
+            'hiringManager' => $request->hiringManager,
          ]);
          
          Financial::where('userId',$request->profileId)->update([
             'salaryType' => $request->salaryType,          
-             'payScale' => $request->payScale,          
-             'accHolderName' => $request->accHolderName,          
-             'accNumber' => $request->accNumber,          
-             'bankName' => $request->bankName,          
-             'branch' => $request->branch,          
-             'branchCode' => $request->branchCode,
+            'payScale' => $request->payScale,          
+            'accHolderName' => $request->accHolderName,          
+            'accNumber' => $request->accNumber,          
+            'bankName' => $request->bankName,          
+            'branch' => $request->branch,          
+            'branchCode' => $request->branchCode,
          ]); 
          
          // Flash a success message and redirect back
@@ -80,48 +125,7 @@ class userController extends Controller
          $users = User::whereNot('userType',1)->get();
       }        
         return view('pages.employees.index',['users' => $users]);
-    }
-    public function sendLink()
-    {
-      $userTypes = UserType::whereNot('id',1)->get();
-      return view('pages.employees.sendLink',['userTypes'=> $userTypes]);
-    }
-    public function sendLinkStore(Request $request)
-    {
-      // return $request->all();
-      // Generate a random password
-      $autoPassword = Str::random(8);     
-
-      // store  user data
-      $user = User::create([
-          'userType' => $request->userType,
-          'email' => $request->email,          
-          'password' => Hash::make($autoPassword),           
-      ]);
-
-      // store employee data
-      $employee = Employees::create([
-          'userId' => $user->id,
-          'firstName' => $request->firstName,          
-          'lastName' => $request->lastName,          
-          'nickName' => $request->nickName,
-      ]);
-
-      // store financial data
-      $financial = Financial::create([
-          'userId' => $user->id,          
-      ]);
-
-       // Send the login details to the user's email
-       Mail::send('notification.invitation', ['user' => $user, 'password' => $autoPassword], function($message) use ($user) {
-          $message->to($user->email)->subject('Your account has been created successfully');
-      });
-      
-      // Flash a success message and redirect back
-      session()->flash('success', 'Link Send to the Email successfully..!!');
-      return redirect()->back();    
-      
-    }
+    }  
      //add employee form
      public function create()
      {    

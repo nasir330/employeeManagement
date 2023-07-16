@@ -35,4 +35,20 @@ class DepartmentsController extends Controller
         session()->flash('success','Department successfully updated !!');
         return redirect()->route('departments');
     }
+
+    //==========ajax requests===========
+
+    //fetch administartative department
+    public function fetchAdminDepartment()
+    {
+        $data = Department::where('id','1')->with('designations')->first();
+
+        return response()->json($data);
+    }
+    //fetch all departments by id
+    // public function fetchDepartment($id)
+    // {
+    //     $departments = Department::where('id',$id)->with('designations')->get();
+    //     return response()->json($departments);
+    // }
 }

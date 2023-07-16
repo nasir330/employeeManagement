@@ -15,14 +15,20 @@ return new class extends Migration
     {
         Schema::create('financials', function (Blueprint $table) {
             $table->id();
-            $table->string('userId');
+            $table->foreignId('userId')->unsigned()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('salaryType')->nullable();
             $table->string('payScale')->nullable();
+            $table->string('bankName')->nullable();
             $table->string('accHolderName')->nullable();
             $table->string('accNumber')->nullable();
-            $table->string('bankName')->nullable();
-            $table->string('branch')->nullable();
-            $table->string('branchCode')->nullable();
+            $table->string('bankSortCode')->nullable();
+            $table->string('bankRoutingCode')->nullable();
+            $table->string('swiftCode')->nullable();
+            $table->string('address1')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('townCity')->nullable();
+            $table->string('stateProvision')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
         });
     }

@@ -37,4 +37,14 @@ class DesignationsController extends Controller
         session()->flash('success','Designations successfully updated !!');
         return redirect()->route('designations');
     }
+
+    //==========ajax requests===========
+
+   
+    //fetch all designation by id
+    public function fetchDesignation($id)
+    {
+        $designations = Designation::where('departmentId',$id)->get();
+        return response()->json($designations);
+    }
 }
