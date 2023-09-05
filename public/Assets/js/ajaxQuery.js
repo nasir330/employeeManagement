@@ -56,13 +56,15 @@ $(document).on('change', '#userType', function () {
 $(document).on('change', '#department', function () {
     var departmentId = $(this).val();
     $('#designation').empty();
+    // alert(departmentId);
     $.ajax({
-        url: '/fetch-designation/' + departmentId,
+        url: '/admin/fetch-designation/' + departmentId,
         type: 'GET',
         success: function (response) {
             $.each(response, function (key, value) {
                 var id = value.id;
                 var designation = value.designation;
+                console.log(id);
                 var option = '<option value="' + id + '">' + designation + '</option>';
                 $('#designation').append(option);
             });

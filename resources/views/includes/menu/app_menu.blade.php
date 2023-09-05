@@ -26,19 +26,19 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{route('sendLink.employee')}}">
+                        <a href="{{route('admin.sendLink.employee')}}">
                             <i class="fa-solid fa-user-check"></i>
                             Send Link
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('add.employee')}}">
+                        <a href="{{route('admin.employee.list')}}">
                             <i class="fa-solid fa-user-check"></i>
                             Add New
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('employee.list')}}">
+                        <a href="{{route('admin.employee.list')}}">
                             <i class="fa-solid fa-user-group"></i>
                             Employee List
                         </a>

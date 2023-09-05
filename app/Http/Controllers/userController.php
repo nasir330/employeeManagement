@@ -18,49 +18,8 @@ use Excel;
 
 class userController extends Controller
 {
-   public function sendLink()
-   {
-     $departments = Department::all();    
-   //   $designations = Designation::all();
-     $userTypes = UserType::whereNot('id',1)->get();
-     return view('pages.employees.sendLink',['userTypes'=> $userTypes, 'departments'=> $departments]);
-   }
-   public function sendLinkStore(Request $request)
-   {
-     return $request->all();
-     // Generate a random password
-     $autoPassword = Str::random(8);     
-
-     // store  user data
-     $user = User::create([
-         'userType' => $request->userType,
-         'email' => $request->email,          
-         'password' => Hash::make($autoPassword),           
-     ]);
-
-     // store employee data
-     $employee = Employees::create([
-         'userId' => $user->id,
-         'firstName' => $request->firstName,          
-         'lastName' => $request->lastName,          
-         'nickName' => $request->nickName,
-     ]);
-
-     // store financial data
-     $financial = Financial::create([
-         'userId' => $user->id,          
-     ]);
-
-      // Send the login details to the user's email
-      Mail::send('notification.invitation', ['user' => $user, 'password' => $autoPassword], function($message) use ($user) {
-         $message->to($user->email)->subject('Your account has been created successfully');
-     });
-     
-     // Flash a success message and redirect back
-     session()->flash('success', 'Link Send to the Email successfully..!!');
-     return redirect()->back();    
-     
-   }
+ 
+   
    public function setProfile()
    {
       $userTypes = UserType::whereNot('id',1)->get();

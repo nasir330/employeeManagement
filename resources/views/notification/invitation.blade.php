@@ -12,8 +12,11 @@
     Dear {{ $user->employees->firstName. ' '.$user->employees->lastName }},
 
     <p>
-        You have been invited to complete your profile on our system application. Please use the following login details
-        to access your account to complete your profile:
+        Account has been created as an <strong>Employee</strong> for you.
+    </p>
+    <p>
+        Please use the following login credential
+        to access your account and  complete your profile:
     </p>
 
     <p style="padding:10px; border:0.5px solid gray; background-color:lightgray; font-size:14px; width:30%;">

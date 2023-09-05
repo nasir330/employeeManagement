@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\Employees\EmployeeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\DepartmentsController;
@@ -30,14 +31,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
     //employees routes
-    Route::get('/employee-list', [userController::class, 'index'])->name('employee.list');
+    Route::get('/employee-list', [userController::class, 'index'])->name('admin.employee.list');
     Route::get('/set-profiledata/',[userController::class,'setProfile'])->name('set.profile');
     Route::post('/set-profiledata/',[userController::class,'setProfileData'])->name('set.profile');
     Route::get('/export-users',[userController::class, 'exportUser'])->name('exportUser');
-    Route::get('/send-link', [userController::class, 'sendLink'])->name('sendLink.employee');
-    Route::post('/send-link', [userController::class, 'sendLinkStore'])->name('sendLink.employee');
+    Route::get('/send-link', [EmployeeController::class, 'sendLink'])->name('admin.sendLink.employee');
+    Route::post('/send-link', [EmployeeController::class, 'sendLinkStore'])->name('admin.sendLink.employee');
+    // Route::post('/send-link', [userController::class, 'sendLinkStore'])->name('sendLink.employee');
     Route::get('/add-employee', [userController::class, 'create'])->name('add.employee');
     Route::post('/add-employee', [userController::class, 'store'])->name('add.employee');
     Route::get('/employee-view/{id}',[UserController::class,'view'])->name('view.employee');
@@ -73,7 +75,7 @@ Route::middleware('auth')->group(function () {
     route::post('/add-designations',[DesignationsController::class, 'store'])->name('add.designations');
     route::get('/edit-designations/{id}',[DesignationsController::class, 'edit'])->name('edit.designations');
     route::post('/update-designations',[DesignationsController::class, 'update'])->name('update.designations');
-    route::get('/fetch-designation/{id}',[DesignationsController::class, 'fetchDesignation'])->name('fetch.designation');
+    route::get('/fetch-designation/{id}',[DesignationsController::class, 'fetchDesignation'])->name('admin.fetch.designation');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
