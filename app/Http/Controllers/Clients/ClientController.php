@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Models\UserType;
 
 class ClientController extends Controller
 {
@@ -15,6 +17,14 @@ class ClientController extends Controller
     public function index()
     {
         //
+    }    
+    public function sendLink()
+    {
+      $departments = Department::all();    
+    //   $designations = Designation::all();
+      $userTypes = UserType::whereNot('id',1)
+      ->where('id',3)->first();
+      return view('admin.clients.sendLink',['userTypes'=> $userTypes, 'departments'=> $departments]);
     }
 
     /**

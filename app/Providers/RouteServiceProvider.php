@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/dashboard';
-    public const SETPROFILE = '/set-profiledata';
+    public const SETPROFILE = 'employee/set-profiledata';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
