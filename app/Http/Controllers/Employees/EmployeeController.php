@@ -45,8 +45,8 @@ class EmployeeController extends Controller
          'email' => $request->email,          
          'password' => Hash::make($autoPassword),           
      ]);
-        $countryCode = $request->countryCode;
-        $phoneNumber = $request->countryCode.$request->phone. $request->phone;
+       
+        $phoneNumber = $request->countryCode.$request->phone;
         
      // store employee data
      $employee = Employees::create([
@@ -54,9 +54,13 @@ class EmployeeController extends Controller
          'firstName' => $request->firstName,          
          'lastName' => $request->lastName,          
          'nickName' => $request->nickName,
+         'phone1' => $phoneNumber,
+         'whatsappNo' => $request->whatsappNumber,
          'department' => $request->department,
          'designation' => $request->department,
-         'nickName' => $request->nickName,
+         'salaryType' => $request->salaryType,        
+         'payScale' => $request->payScale,        
+        
      ]);
 
      // store financial data

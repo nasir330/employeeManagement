@@ -1,15 +1,14 @@
-@extends('layouts.app')
-@section('title','Create Employee')
+@extends('layouts.header')
+@section('title','Create Account')
 
 @section('content')
 
 <!-- sales overview start -->
 <div class="row clearfix row-deck">
-    <div class="col-md-10 offset-md-1 mb-2">
+    <div class="col mb-2">
         <div class="card">
             <div class="card-header text-center">
-                <h3 class="card-title">Complete your Profile</h3>
-                {{Auth::user()->employees->nickName}}
+                <h3 class="card-title">Create Employees Account</h3>
                 @if(session()->has('success'))
                 <div id="successMessage" class="text-center text-success p-2 ml-3">
                     <span style="color:green;">{{session('success')}}</span>
@@ -17,7 +16,7 @@
                 @endif
             </div>
             <div class="card-body p-2">
-                <form action="{{route('employee.set.profile')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('add.employee')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div id="boxitem" class="row">
@@ -33,16 +32,15 @@
                                         <div class="col-md-6">
                                             <label for="firstName" class="mb-0">First Name</label>
                                             <div class="input-group mb-2">
-                                            <input type="hidden" name="profileId" value="{{Auth::user()->id}}">
                                                 <input type="text" name="firstName" class="form-control"
-                                                    value="{{Auth::user()->employees->firstName}}" required>
+                                                    placeholder="Enter first name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="lastName" class="mb-0">Last Name</label>
                                             <div class="input-group mb-2">
                                                 <input type="text" name="lastName" class="form-control"
-                                                value="{{Auth::user()->employees->lastName}}" required>
+                                                    placeholder="Enter last name" required>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +49,7 @@
                                             <label for="nickName" class="mb-0">Nick Name</label>
                                             <div class="input-group mb-2">
                                                 <input type="text" name="nickName" class="form-control"
-                                                value="{{Auth::user()->employees->nickName}}" required>
+                                                    placeholder="Enter Nick Name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -80,14 +78,14 @@
                                             <label for="presentAddress" class="mb-0">Present
                                                 Address</label>
                                             <div class="input-group mb-2">
-                                                <textarea name="presentAddress" rows="3" class="form-control"></textarea>
+                                                <textarea name="presentAddress" cols="30" rows="3"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="permanentAddress" class="mb-0">Permanent
                                                 Address</label>
                                             <div class="input-group mb-2">
-                                                <textarea name="permanentAddress" rows="3" class="form-control"></textarea>
+                                                <textarea name="permanentAddress" cols="30" rows="3"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +153,38 @@
                                 </div>
                             </div>
                             <!-- Personal info end -->
-                            
+
+                            <!-- Auth info start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    Authentication
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <label for="email" class="mb-0">Email</label>
+                                            <div class="input-group mb-2">
+                                                <input type="email" name="email" class="form-control"
+                                                    placeholder="Enter email" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="userType" class="mb-0">User Type</label>
+                                            <div class="input-group mb-2">
+                                                <select name="userType" class="form-select form-control" required>
+                                                    <option value="">--Select User Type--</option>
+                                                    @foreach($userTypes as $key=> $userType)
+                                                    <option value="{{$userType->id}}">
+                                                        {{$userType->type}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Auth info end -->
                         </div>
                         <!-- Personal and Auth Information end -->
 
@@ -173,8 +202,11 @@
                                             <div class="input-group mb-2">
                                                 <select id="department" name="department"
                                                     class="form-select form-control" required>
-                                                    <option value="">{{Auth::user()->employees->department}}</option>
-                                                   
+                                                    <option value="">--Select Department--</option>
+                                                    @foreach($departments as $key=> $department)
+                                                    <option value="{{$department->id}}">
+                                                        {{$department->department}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -182,7 +214,11 @@
                                             <label for="designation" class="mb-0">Designation</label>
                                             <div class="input-group mb-2">
                                                 <select name="designation" class="form-select form-control" required>
-                                                <option value="">{{Auth::user()->employees->designation}}</option>
+                                                    <option value="">--Select Designation--</option>
+                                                    @foreach($designations as $key=> $designation)
+                                                    <option value="{{$designation->id}}">
+                                                        {{$designation->designation}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -326,7 +362,7 @@
 
                     <div class="row mb-2">
                         <div class="input-group">
-                            <button class="col-md-4 btn btn-primary">
+                            <button class="btn btn-primary">
                                 Submit
                             </button>
                         </div>

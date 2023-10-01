@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.employee.list')}}">
+                        <a href="{{route('admin.add.employee')}}">
                             <i class="fa-solid fa-user-check"></i>
                             Add New
                         </a>
@@ -41,6 +41,32 @@
                         <a href="{{route('admin.employee.list')}}">
                             <i class="fa-solid fa-user-group"></i>
                             Employee List
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="has-arrow arrow-c">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Clients</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{route('admin.sendLink.client')}}">
+                            <i class="fa-solid fa-user-check"></i>
+                            Send Link
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.add.employee')}}">
+                            <i class="fa-solid fa-user-check"></i>
+                            Add New
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.employee.list')}}">
+                            <i class="fa-solid fa-user-group"></i>
+                            Clients List
                         </a>
                     </li>
                 </ul>

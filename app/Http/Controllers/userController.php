@@ -31,6 +31,7 @@ class userController extends Controller
    public function setProfileData(Request $request)
    {      
 
+      // return $request->all();
          // Save the user's photo
          $photo = $request->file('photo');
          $photo_name = $photo->getClientOriginalName();
@@ -38,38 +39,52 @@ class userController extends Controller
          $photo_path = 'storage/uploads/'.$photo_name;
 
          // update employee data
-         Employees::where('userId',$request->profileId)->update([
-            'firstName' => $request->firstName,          
-            'lastName' => $request->lastName,          
-            'nickName' => $request->nickName,          
+         Employees::where('userId',$request->profileId)->update([                  
             'fathersName' => $request->fathersName,          
             'gender' => $request->gender,          
-            'presentAddress' => $request->presentAddress,          
-            'permanentAddress' => $request->permanentAddress,          
-            'dob' => $request->dob,          
-            'phone' => $request->phone,          
+            'dob' => $request->dob,   
+            'phone2' => $request->phone2,          
             'referenceName' => $request->referenceName,          
             'referencePhone' => $request->referencePhone,          
             'govId' => $request->govId,          
             'govIdNo' => $request->govIdNo,          
-            'photo' => $photo_path,          
+
+            'address1' => $request->address1,          
+            'townCity1' => $request->townCity1,  
+            'postZipCode1' => $request->postZipCode1,  
+            'state1' => $request->state1,  
+            'country1' => $request->country1,  
+
+            'address2' => $request->address2,          
+            'townCity2' => $request->townCity2,  
+            'postZipCode2' => $request->postZipCode2,  
+            'state2' => $request->state2,  
+            'country2' => $request->country2,  
+
             'department' => $request->department,         
             'designation' => $request->designation,         
             'joinDate' => $request->joinDate,         
             'leaveDate' => $request->leaveDate,         
             'status' => $request->status,         
             'shift' => $request->shift,         
-            'hiringManager' => $request->hiringManager,
+            'hiringManager' => $request->hiringManager,           
+            'photo' => $photo_path,          
          ]);
          
          Financial::where('userId',$request->profileId)->update([
-            'salaryType' => $request->salaryType,          
-            'payScale' => $request->payScale,          
-            'accHolderName' => $request->accHolderName,          
-            'accNumber' => $request->accNumber,          
-            'bankName' => $request->bankName,          
-            'branch' => $request->branch,          
-            'branchCode' => $request->branchCode,
+            'salaryType' => $request->salaryType,
+            'payScale' => $request->payScale,
+            'bankName' => $request->bankName,
+            'accHolderName' => $request->accHolderName,
+            'accNumber' => $request->accNumber,
+            'bankSortCode' => $request->bankSortCode,
+            'bankRoutingCode' => $request->bankRoutingCode,
+            'swiftCode' => $request->swiftCode,
+            'address1' => $request->address1,
+            'address2' => $request->address2,
+            'townCity' => $request->townCity,
+            'stateProvision' => $request->stateProvision,
+            'country' => $request->country,            
          ]); 
          
          // Flash a success message and redirect back
@@ -78,11 +93,9 @@ class userController extends Controller
    }
     public function index()
     {
-      if(Auth::user()->userType==1){
-         $users = User::all();
-      }else{
-         $users = User::whereNot('userType',1)->get();
-      }        
+      $users = Auth::user()->userType == 1
+        ? User::all()
+        : User::where('userType', 3)->get();        
         return view('pages.employees.index',['users' => $users]);
     }  
      //add employee form
