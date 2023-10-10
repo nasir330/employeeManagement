@@ -1,7 +1,13 @@
 <div id="left-sidebar" class="sidebar">
     <div class="row">
         <div class="col-auto text-white">
-            <h4>{{Auth::user()->employees->firstName. ' '.Auth::user()->employees->lastName }}</h4>
+            <h4>
+                @if (Auth::user()->employees)
+                {{ Auth::user()->employees->firstName.' '.Auth::user()->employees->lastName }}
+                @elseif(Auth::user()->clients)
+                {{ Auth::user()->clients->firstName.' '.Auth::user()->clients->lastName }}
+                @endif
+            </h4>
         </div>
         <!-- <div class="col-auto d-flex justify-content-end">
             <a href="javascript:void(0)" class="menu_option float-right">
@@ -58,13 +64,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.add.employee')}}">
+                        <a href="{{route('admin.add.client')}}">
                             <i class="fa-solid fa-user-check"></i>
                             Add New
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.employee.list')}}">
+                        <a href="{{route('admin.client.list')}}">
                             <i class="fa-solid fa-user-group"></i>
                             Clients List
                         </a>

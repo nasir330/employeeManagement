@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Clients;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,6 @@ class Project extends Model
     //Employee table relation
     public function clients()
     {
-        return $this->belongsTo(Employees::class,'clientId', 'userId');
+        return $this->belongsTo(Clients::class,'clientId', 'userId');
     }
 }

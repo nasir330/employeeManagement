@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Employees;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,13 +43,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //table relation with employee
+    //table relation with user_types
     public function userTypes() {
         return $this->belongsTo(UserType::class, 'userType', 'id');
     }
     //table relation with employee
     public function employees() {
         return $this->hasOne(Employees::class, 'userId', 'id');
+    }
+    //table relation with client
+    public function clients() {
+        return $this->hasOne(Clients::class, 'userId', 'id');
     }
     //table relation with financial
     public function financials() {

@@ -17,9 +17,8 @@
                 @endif
             </div>
             <div class="card-body p-2">
-                <form action="{{route('set.profile')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('set.profile.employee')}}" method="post" enctype="multipart/form-data">
                     @csrf
-
                     <div id="boxitem" class="row">
                         <!-- Personal and Auth Information start -->
                         <div class="col-md-6">

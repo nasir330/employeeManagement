@@ -17,9 +17,8 @@
                 @endif
             </div>
             <div class="card-body p-2">
-                <form action="{{route('set.profile')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('set.profile.employee')}}" method="post" enctype="multipart/form-data">
                     @csrf
-
                     <div id="boxitem" class="row">
                         <!-- Personal and Auth Information start -->
                         <div class="col-md-6">
@@ -33,16 +32,16 @@
                                         <div class="col-md-6">
                                             <label for="firstName" class="mb-0">First Name</label>
                                             <div class="input-group mb-2">
-                                            <input type="hidden" name="profileId" value="{{Auth::user()->id}}">
+                                                <input type="hidden" name="profileId" value="{{Auth::user()->id}}">
                                                 <input type="text" name="firstName" class="form-control"
-                                                    value="{{Auth::user()->employees->firstName}}" required>
+                                                    value="{{Auth::user()->employees->firstName}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="lastName" class="mb-0">Last Name</label>
                                             <div class="input-group mb-2">
                                                 <input type="text" name="lastName" class="form-control"
-                                                value="{{Auth::user()->employees->lastName}}" required>
+                                                    value="{{Auth::user()->employees->lastName}}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +50,7 @@
                                             <label for="nickName" class="mb-0">Nick Name</label>
                                             <div class="input-group mb-2">
                                                 <input type="text" name="nickName" class="form-control"
-                                                value="{{Auth::user()->employees->nickName}}" required>
+                                                    value="{{Auth::user()->employees->nickName}}" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -61,10 +60,10 @@
                                                 <input type="text" name="fathersName" class="form-control"
                                                     placeholder="Enter fathers name" required>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                     <div class="row mb-2">
-                                    <div class="col-md-12">
+                                        <div class="col-md-12">
                                             <label for="gender" class="mb-0">Gender</label>
                                             <div class="input-group mb-2">
                                                 <select name="gender" class="form-select form-control" required>
@@ -72,22 +71,6 @@
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-2">
-                                        <div class="col-md-6">
-                                            <label for="presentAddress" class="mb-0">Present
-                                                Address</label>
-                                            <div class="input-group mb-2">
-                                                <textarea name="presentAddress" cols="30" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="permanentAddress" class="mb-0">Permanent
-                                                Address</label>
-                                            <div class="input-group mb-2">
-                                                <textarea name="permanentAddress" cols="30" rows="3"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +85,23 @@
                                             <label for="phone" class="mb-0">Phone</label>
                                             <div class="input-group mb-2">
                                                 <input type="text" name="phone" class="form-control"
-                                                    placeholder="Phone number" required>
+                                                    value="{{Auth::user()->employees->phone1}}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">
+                                            <label for="phone2" class="mb-0">Secondary Phone</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="phone2" class="form-control"
+                                                    placeholder="Secondary Phone number" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="whatsappNo" class="mb-0">WhatsApp Number</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="whatsappNo" class="form-control"
+                                                    value="{{Auth::user()->employees->whatsappNo}}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -152,10 +151,100 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Present Address -->
+                                    <div class="row mb-2">
+                                        <div class="card-header">
+                                            <label for="">Present Address</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="address1" class="mb-0">Address</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="address1" class="form-control"
+                                                    placeholder="Enter address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="townCity1" class="mb-0">Town/City</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="townCity1" class="form-control"
+                                                    placeholder="Town/City Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="postZipCode1" class="mb-0">Post code / Zip code</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="postZipCode1" class="form-control"
+                                                    placeholder="Post code / Zip code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="state1" class="mb-0">State</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="state1" class="form-control"
+                                                    placeholder="State Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="country1" class="mb-0">Country</label>
+                                            <div class="input-group mb-2">
+                                                <select name="country1" class="form-select form-control" required>
+                                                    <option value="BD">Bangladesh</option>
+                                                    <option value="India">India</option>
+                                                    <option value="UK">UK</option>
+                                                    <option value="US">US</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Parmanent Address -->
+                                    <div class="row mb-2">
+                                        <div class="card-header">
+                                            <label for="">Parmanent Address</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="address2" class="mb-0">Address</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="address2" class="form-control"
+                                                    placeholder="Enter address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="townCity2" class="mb-0">Town/City</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="townCity2" class="form-control"
+                                                    placeholder="Town/City Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="postZipCode2" class="mb-0">Post code / Zip code</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="postZipCode2" class="form-control"
+                                                    placeholder="Post code / Zip code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="state2" class="mb-0">State</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="state2" class="form-control"
+                                                    placeholder="State Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="country2" class="mb-0">Country</label>
+                                            <div class="input-group mb-2">
+                                                <select name="country2" class="form-select form-control" required>
+                                                    <option value="BD">Bangladesh</option>
+                                                    <option value="India">India</option>
+                                                    <option value="UK">UK</option>
+                                                    <option value="US">US</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Personal info end -->
-                            
+
                         </div>
                         <!-- Personal and Auth Information end -->
 
@@ -173,8 +262,9 @@
                                             <div class="input-group mb-2">
                                                 <select id="department" name="department"
                                                     class="form-select form-control" required>
-                                                    <option value="">{{Auth::user()->employees->department}}</option>
-                                                   
+                                                    <option value="{{Auth::user()->employees->department}}">
+                                                        {{Auth::user()->employees->departments->department}}</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -182,7 +272,9 @@
                                             <label for="designation" class="mb-0">Designation</label>
                                             <div class="input-group mb-2">
                                                 <select name="designation" class="form-select form-control" required>
-                                                <option value="">{{Auth::user()->employees->designation}}</option>
+                                                    <option value="{{Auth::user()->employees->designation}}">
+                                                        {{Auth::user()->employees->departments->designations->designation}}
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -249,15 +341,13 @@
                                     Financial Information
                                 </div>
                                 <div class="card-body">
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <div class="col-md-6">
                                             <label for="salaryType" class="mb-0">Salary Type</label>
                                             <div class="input-group mb-2">
                                                 <select name="salaryType" class="form-select form-control" required>
-                                                    <option value="">--Salary Type--</option>
-                                                    <option value="Monthly">Monthly</option>
-                                                    <option value="Weekly">Weekly</option>
-                                                    <option value="Daily">Daily</option>
+                                                    <option value="{{Auth::user()->employees->salaryType}}">
+                                                        {{Auth::user()->employees->salaryType}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -265,15 +355,22 @@
                                             <label for="payScale" class="mb-0">Pay Scale</label>
                                             <div class="input-group mb-2">
                                                 <select name="payScale" class="form-select form-control" required>
-                                                    <option value="">--Pay Scale--</option>
-                                                    <option value="10000">10000</option>
-                                                    <option value="2400">2400</option>
-                                                    <option value="50">50</option>
+                                                    <option value="{{Auth::user()->employees->payScale}}">
+                                                        {{Auth::user()->employees->payScale}}</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
+                                        <div class="col">
+                                            <label for="bankName" class="mb-0">Bank Name</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="bankName" class="form-control"
+                                                    placeholder="Bank Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">
                                         <div class="col-md-6">
                                             <label for="accHolderName" class="mb-0">Account Holder
                                                 Name</label>
@@ -291,29 +388,72 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
-                                        <div class="col">
-                                            <label for="bankName" class="mb-0">Bank Name</label>
+
+                                    <div class="row mb-1">
+                                        <div class="col-md-6">
+                                            <label for="bankSortCode" class="mb-0">Bank Sort Code </label>
                                             <div class="input-group mb-2">
-                                                <input type="text" name="bankName" class="form-control"
-                                                    placeholder="Bank Name" required>
+                                                <input type="text" name="bankSortCode" class="form-control"
+                                                    placeholder="Bank Sort Code" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="bankRoutingCode" class="mb-0">Routing Code</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="bankRoutingCode" class="form-control"
+                                                    placeholder="Routing Code" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
-                                        <div class="col-md-6">
-                                            <label for="branch" class="mb-0">Branch Name</label>
+                                    <div class="row mb-1">
+                                        <div class="col-md-4">
+                                            <label for="swiftCode" class="mb-0">Swift Code</label>
                                             <div class="input-group mb-2">
-                                                <input type="text" name="branch" class="form-control"
-                                                    placeholder="Branch Name" required>
+                                                <input type="text" name="swiftCode" class="form-control"
+                                                    placeholder="Swift Code" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label for="address1" class="mb-0">Address </label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="address1" class="form-control"
+                                                    placeholder="Address line 1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">                                       
+                                        <div class="col-md-8">
+                                            <label for="address2" class="mb-0">Address Line 2 </label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="address2" class="form-control"
+                                                    placeholder="Address line 2" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="townCity" class="mb-0">Town/City</label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="townCity" class="form-control"
+                                                    placeholder="Town/City" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">
+                                        <div class="col-md-6">
+                                            <label for="stateProvision" class="mb-0">State/Provision </label>
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="stateProvision" class="form-control"
+                                                    placeholder="State / Provision" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="branchCode" class="mb-0">Branch Code</label>
+                                        <label for="country" class="mb-0">Country</label>
                                             <div class="input-group mb-2">
-                                                <input type="text" name="branchCode" class="form-control"
-                                                    placeholder="Branch Code" required>
-                                            </div>
+                                                <select name="country" class="form-select form-control" required>
+                                                    <option value="BD">Bangladesh</option>
+                                                    <option value="India">India</option>
+                                                    <option value="UK">UK</option>
+                                                    <option value="US">US</option>
+                                                </select>
                                         </div>
                                     </div>
 

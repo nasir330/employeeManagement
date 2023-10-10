@@ -108,7 +108,7 @@
                             <i class="fa-solid fa-user-tie"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="page-profile.html">
+                            <a class="dropdown-item" href="{{route('profile.edit')}}">
                                 <i class="dropdown-icon fa-solid fa-user"></i>                               
                                 Profile
                             </a>

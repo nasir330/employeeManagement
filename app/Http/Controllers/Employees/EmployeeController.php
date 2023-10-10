@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employees;
 
 use App\Http\Controllers\Controller;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Employees;
@@ -31,7 +32,7 @@ class EmployeeController extends Controller
     //   $designations = Designation::all();
       $userTypes = UserType::whereNot('id',1)
       ->where('id',3)->first();
-      return view('admin.employees.sendLink',['userTypes'=> $userTypes, 'departments'=> $departments]);
+      return view('superAdmin.employees.sendLink',['userTypes'=> $userTypes, 'departments'=> $departments]);
     }
     public function sendLinkStore(Request $request)
    {
@@ -69,7 +70,7 @@ class EmployeeController extends Controller
      ]);
 
       // Send the login details to the user's email
-      Mail::send('notification.invitation', ['user' => $user, 'password' => $autoPassword], function($message) use ($user) {
+      Mail::send('notification.employeeInvitation', ['user' => $user, 'password' => $autoPassword], function($message) use ($user) {
          $message->to($user->email)->subject('Your account has been created successfully');
      });
      
@@ -78,6 +79,8 @@ class EmployeeController extends Controller
      return redirect()->back();    
      
    }
+
+   
 
     /**
      * Show the form for creating a new resource.

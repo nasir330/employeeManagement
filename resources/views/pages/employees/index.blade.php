@@ -38,30 +38,28 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach($users as $key=> $employee)
+                            @foreach($users as $key => $user)
                             <tr>
-                                <td>{{$employee->id}}</td>
-                                <td>{{$employee->employees->firstName. ' '.$employee->employees->lastName}}
-                                </td>
-                                <td>{{$employee->email}}</td>
-                                <td>{{$employee->userTypes->type}}</td>
+                                <td>{{$key+1}}</td>
+                                <td>{{$user->employees->firstName.' '.$user->employees->lastName}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->userTypes->type}}</td>
                                 <td>
-                                    @if(!empty($employee->employees->departments))
-                                    {{$employee->employees->departments->department}}
+                                    @if(!empty($user->employees->departments))
+                                    {{$user->employees->departments->department}}
                                     @else
                                     {{'NA'}}
                                     @endif
                                 </td>
                                 <td>
-                                    @if(!empty($employee->employees->departments->designations))
-                                    {{$employee->employees->departments->designations->designation}}
+                                    @if(!empty($user->employees->departments->designations))
+                                    {{$user->employees->departments->designations->designation}}
                                     @else
                                     {{'NA'}}
                                     @endif
                                 </td>
-                                <td>{{$employee->employees->shift}}</td>
-                                <td>{{$employee->employees->status}}</td>
+                                <td>{{$user->employees->shift}}</td>
+                                <td>{{$user->employees->status}}</td>
                                 <td>
                                     <div class="card-options d-flex justify-content-start">
                                         <div class="dropend">
@@ -70,19 +68,19 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown-item">
-                                                    <a href="{{route('view.employee',['id'=>$employee->id])}}">
+                                                    <a href="{{route('view.employee',['id'=>$user->id])}}">
                                                         <i class="dropdown-icon fa fa-eye"></i>
                                                         View Details
                                                     </a>
                                                 </li>
                                                 <li class="dropdown-item">
-                                                    <a href="{{route('edit.employee',['id'=>$employee->id])}}">
+                                                    <a href="{{route('edit.employee',['id'=>$user->id])}}">
                                                         <i class="dropdown-icon fa fa-edit"></i>
                                                         edit
                                                     </a>
                                                 </li>
                                                 <li class="dropdown-item">
-                                                    <a href="{{route('delete.employee',['id'=>$employee->id])}}">
+                                                    <a href="{{route('delete.employee',['id'=>$user->id])}}">
                                                         <i class="dropdown-icon fa fa-trash"></i>
                                                         Delete
                                                     </a>
@@ -94,7 +92,6 @@
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>

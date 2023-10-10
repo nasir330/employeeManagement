@@ -14,7 +14,7 @@ class ProjectController extends Controller
     {
         $clients = User::where('userType',4)->get();
         $projects = Project::all();
-        return view('pages.projects.index',['clients'=>$clients, 'projects'=>$projects]);
+        return view('superAdmin.projects.index',['clients'=>$clients, 'projects'=>$projects]);
     }
     //create project
     public function store(Request $request)

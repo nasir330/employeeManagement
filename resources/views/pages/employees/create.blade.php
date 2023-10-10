@@ -16,7 +16,7 @@
                 @endif
             </div>
             <div class="card-body p-2">
-                <form action="{{route('add.employee')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.add.employee')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div id="boxitem" class="row">
